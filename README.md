@@ -5,10 +5,10 @@
 ## 这是一个还在测试的脚本，目前仅支持`Centos7`系统
 
 - 用到的环境：
-- [Nodejs](https://nodejs.org/en)
-- [Git](https://git-scm.com/)
-- [Redis](https://redis.io/)
-- [Miao-YunZai-Bot V3](https://github.com/yoimiya-kokomi/Miao-Yunzai)
+  - [Nodejs](https://nodejs.org/en)
+  - [Git](https://git-scm.com/)
+  - [Redis](https://redis.io/)
+  - [Miao-YunZai-Bot V3](https://github.com/yoimiya-kokomi/Miao-Yunzai)
 
 ## 如果您懂得其他，发行版`Linux`系统的使用，可以根据您的使用习惯`修改`命令
 
