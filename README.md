@@ -23,7 +23,7 @@ git clone https://github.com/wangshengjj/YunZai-Bot_Shell.git
 ### 二、赋予执行权限
 
 ```
-chmod 777 $(pwd)/yunzai-bot.sh
+chmod 777 ./yunzai-bot.sh
 ```
 
 ### 三、执行
@@ -35,7 +35,7 @@ chmod 777 $(pwd)/yunzai-bot.sh
 **或**
 
 ```
-bash $(pwd)/yunzai-bot.sh
+bash ./yunzai-bot.sh
 ```
 
 ## 欢迎访问我的博客https://www.wangshengjj.work
