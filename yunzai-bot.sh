@@ -83,21 +83,69 @@ else
     rpm -q chromium
     echo "==============================================================================================="
 fi
-
-echo "Miao-YunZai-Bot is being cloned"
-echo "正在克隆Miao-YunZai-Bot"
-echo "==============================================================================================="
-git clone https://gitee.com/yoimiya-kokomi/Miao-Yunzai.git &> /dev/null
-echo "Miao-YunZai-Bot is being installed"
-echo "正在安装Miao-YunZai-Bot"
-cd Miao-Yunzai && pwd
-echo "==============================================================================================="
-npm install pnpm -g &> /dev/null && pnpm install -P &> /dev/null
-echo "Miao-YunZai-Bot has been installed! Looking forward to your next use! by@WangShengJJ"
-echo 'Miao-YunZai-Bot已经安装完成! 期待您的下次使用! by@WangShengJJ'
-echo "==============================================================================================="
-echo "The shell will automatically start Miao-YunZai-Bot in 5 seconds!"
-echo '脚本将于5秒后自动启动Miao-YunZai-Bot!'
-echo "==============================================================================================="
-sleep 5s
-node app
+#选择YunZai版本
+cat << eof
+=========请选择您要安装的版本===============
+1.安装Miao-YunZai(请输入1)
+2.安装TRSS-YunZai(请输入2)
+3.退出安装(请输入3)
+==========================================
+eof
+echo 
+read -p "请选择你要安装的版本:" choose
+case $choose in
+    1)
+        echo "==============================================================================================="
+        echo "正在安装Miao-YunZai"
+        echo "==============================================================================================="
+        echo "Miao-YunZai-Bot is being cloned"
+        echo "正在克隆Miao-YunZai-Bot"
+        echo "==============================================================================================="
+        git clone https://gitee.com/yoimiya-kokomi/Miao-Yunzai.git &> /dev/null
+        git clone --depth 1 https://gitee.com/yoimiya-kokomi/miao-plugin plugins/miao-plugin &> /dev/null
+        echo "Miao-YunZai-Bot is being installed"
+        echo "正在安装Miao-YunZai-Bot"
+        cd Miao-Yunzai && pwd
+        echo "==============================================================================================="
+        npm --registry=https://registry.npmmirror.com install pnpm -g &> /dev/null && pnpm config set registry https://registry.npmmirror.com &> /dev/null && pnpm install -P &> /dev/null && pnpm add image-size -w &> /dev/null
+        echo "Miao-YunZai-Bot has been installed! Looking forward to your next use! by@WangShengJJ"
+        echo 'Miao-YunZai-Bot已经安装完成! 期待您的下次使用! by@WangShengJJ'    
+        echo "==============================================================================================="
+        echo "The shell will automatically start Miao-YunZai-Bot in 5 seconds!"
+        echo '脚本将于5秒后自动启动Miao-YunZai-Bot!'
+        echo "==============================================================================================="
+        sleep 5s
+        node app
+        ;;
+    2)
+        echo "==============================================================================================="
+        echo "正在安装TRSS-YunZai"
+        echo "==============================================================================================="
+        echo "TRSS-YunZai-Bot is being cloned"
+        echo "正在克隆TRSS-YunZai-Bot"
+        echo "==============================================================================================="
+        git clone https://gitee.com/TimeRainStarSky/Yunzai &> /dev/null
+        git clone --depth 1 https://gitee.com/yoimiya-kokomi/miao-plugin plugins/miao-plugin &> /dev/null
+        echo "TRSS-YunZai-Bot is being installed"
+        echo "正在安装TRSS-YunZai-Bot"
+        cd Yunzai && pwd
+        echo "==============================================================================================="
+        npm --registry=https://registry.npmmirror.com install pnpm -g &> /dev/null && pnpm config set registry https://registry.npmmirror.com &> /dev/null && pnpm install -P &> /dev/null && pnpm add image-size -w &> /dev/null
+        echo "TRSS-YunZai-Bot has been installed! Looking forward to your next use! by@WangShengJJ"
+        echo 'TRSS-YunZai-Bot已经安装完成! 期待您的下次使用! by@WangShengJJ'    
+        echo "==============================================================================================="
+        echo "The shell will automatically start TRSS-YunZai-Bot in 5 seconds!"
+        echo '脚本将于5秒后自动启动TRSS-YunZai-Bot!'
+        echo "==============================================================================================="
+        sleep 5s
+        node app
+        ;;
+    3)
+        echo "用户选择退出安装"
+        exit 0
+        ;;
+    *)
+        echo "选择错误"
+        exit 1
+        ;;
+esac
