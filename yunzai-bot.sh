@@ -100,12 +100,16 @@ case $choose in
         echo "==============================================================================================="
         echo "Miao-YunZai-Bot is being cloned"
         echo "正在克隆Miao-YunZai-Bot"
-        echo "==============================================================================================="
         git clone https://gitee.com/yoimiya-kokomi/Miao-Yunzai.git &> /dev/null
+        echo "==============================================================================================="
+        cd Miao-Yunzai && pwd
+        echo "==============================================================================================="
+        echo "正在安装喵喵插件"
+        #安装喵喵插件
         git clone --depth 1 https://gitee.com/yoimiya-kokomi/miao-plugin plugins/miao-plugin &> /dev/null
+        echo "==============================================================================================="
         echo "Miao-YunZai-Bot is being installed"
         echo "正在安装Miao-YunZai-Bot"
-        cd Miao-Yunzai && pwd
         echo "==============================================================================================="
         npm --registry=https://registry.npmmirror.com install pnpm -g &> /dev/null && pnpm config set registry https://registry.npmmirror.com &> /dev/null && pnpm install -P &> /dev/null && pnpm add image-size -w &> /dev/null
         echo "Miao-YunZai-Bot has been installed! Looking forward to your next use! by@WangShengJJ"
@@ -123,12 +127,16 @@ case $choose in
         echo "==============================================================================================="
         echo "TRSS-YunZai-Bot is being cloned"
         echo "正在克隆TRSS-YunZai-Bot"
-        echo "==============================================================================================="
         git clone https://gitee.com/TimeRainStarSky/Yunzai &> /dev/null
+        echo "==============================================================================================="
+        cd Yunzai && pwd
+        echo "==============================================================================================="
+        echo "正在安装喵喵插件"
+        #安装喵喵插件
         git clone --depth 1 https://gitee.com/yoimiya-kokomi/miao-plugin plugins/miao-plugin &> /dev/null
+        echo "==============================================================================================="
         echo "TRSS-YunZai-Bot is being installed"
         echo "正在安装TRSS-YunZai-Bot"
-        cd Yunzai && pwd
         echo "==============================================================================================="
         npm --registry=https://registry.npmmirror.com install pnpm -g &> /dev/null && pnpm config set registry https://registry.npmmirror.com &> /dev/null && pnpm install -P &> /dev/null && pnpm add image-size -w &> /dev/null
         echo "TRSS-YunZai-Bot has been installed! Looking forward to your next use! by@WangShengJJ"
