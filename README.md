@@ -9,6 +9,7 @@
   - [Git](https://git-scm.com/)
   - [Redis](https://redis.io/)
   - [Miao-YunZai-Bot V3](https://github.com/yoimiya-kokomi/Miao-Yunzai)
+  - [TRSS-YunZai-Bot](https://gitee.com/TimeRainStarSky/TRSS_Yunzai)
 
 ## 如果您懂得其他，发行版`Linux`系统的使用，可以根据您的使用习惯`修改`命令
 
