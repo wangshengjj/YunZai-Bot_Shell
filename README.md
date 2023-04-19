@@ -43,7 +43,7 @@ bash ./YunZai-Bot_Shell/yunzai-bot.sh
 
 如果go-cqhttp提示如下字样，请修改`Yunzai/go-cqhttp/device.json`文件
 
-> 把`\"protocol":6,"imei\"` 里面的6改成3即可
+> 把`"protocol":6,"imei"` 里面的6改成3即可
 
 ```
 [2023-04-19 23:30:11] [WARNING]: 登录失败: 登录失败，建议升级最新版本后重试，或通过问题反馈与我们联系。 Code: 45 
