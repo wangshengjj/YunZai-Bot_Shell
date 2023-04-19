@@ -51,6 +51,6 @@ bash ./YunZai-Bot_Shell/yunzai-bot.sh
 [2023-04-19 23:30:11] [WARNING]: 或使用 -update-protocol 升级到最新协议后重试
 ```
 
-## 欢迎访问我的博客https://www.wangshengjj.work
+## 欢迎访问我的博客https://www.wsjj.top
 
 ![logo](https://www.wangshengjj.work/upload/2022/10/logo3.png)
