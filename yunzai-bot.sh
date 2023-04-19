@@ -1,9 +1,10 @@
 #! /bin/bash
+
 echo "==============================================================================================="
-echo 'Welcome to Miao-YunZai-Bot one-click installation script, this script is made by WangShengJJ'
-echo '欢迎使用Miao-YunZai-Bot一键安装脚本,本脚本由网笙久久制作'
-echo '注意:本脚本仅支持Centos7!'
-echo '访问网笙久久的博客,查看更多信息! 链接 https://www.wangshengjj.work/'
+echo 'Welcome to YunZai-Bot one-click installation script, this script is made by WangShengJJ'
+echo '欢迎使用YunZai-Bot一键安装脚本,本脚本由网笙久久制作'
+echo -e "注意:本脚本仅支持\e[31mCentos7! \e[0m"
+echo '访问网笙久久的博客,查看更多信息! 链接 https://www.wsjj.top/'
 echo "==============================================================================================="
 echo "The Yum source is being configured, please wait patiently for a long time"
 echo -e "正在配置Yum源 \e[31m时间较长请耐心等待\e[0m"
@@ -11,7 +12,7 @@ echo "==========================================================================
 yum install -y wget &> /dev/null && yum install -y curl &> /dev/null
 wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo  && wget -O /etc/yum.repos.d/epel.repo https://mirrors.aliyun.com/repo/epel-7.repo
 echo "==============================================================================================="
-echo "正在建立Yum缓存"
+echo -e "正在建立Yum缓存 \e[31m时间较长请耐心等待\e[0m"
 yum clean all &> /dev/null && yum makecache &> /dev/null
 echo "==============================================================================================="
 echo "Testing the Yum source"
@@ -48,6 +49,8 @@ if redis-server --version &> /dev/null; then
 else
     echo "正在安装Redis"
     yum -y install redis &> /dev/null && redis-server --daemonize yes &> /dev/null
+    #把redis加入开机启动项
+    systemctl enable redis &> /dev/null
     echo "==============================================================================================="
     echo "正在测试Redis环境"
     redis-server --version
@@ -76,7 +79,7 @@ if rpm -q chromium &> /dev/null; then
     rpm -q chromium
     echo "==============================================================================================="
 else
-    echo "正在安装Chromium"
+    echo -e "正在安装Chromium \e[31m时间较长请耐心等待\e[0m"
     yum -y install chromium &> /dev/null
     echo "==============================================================================================="
     echo "正在测试Chromium环境"
@@ -102,6 +105,7 @@ case $choose in
         echo "正在克隆Miao-YunZai-Bot"
         git clone https://gitee.com/yoimiya-kokomi/Miao-Yunzai.git &> /dev/null
         echo "==============================================================================================="
+        echo "当前脚本所在的运行目录"
         cd Miao-Yunzai && pwd
         echo "==============================================================================================="
         echo "正在安装喵喵插件"
@@ -129,6 +133,7 @@ case $choose in
         echo "正在克隆TRSS-YunZai-Bot"
         git clone https://gitee.com/TimeRainStarSky/Yunzai &> /dev/null
         echo "==============================================================================================="
+        echo "当前脚本所在的运行目录"
         cd Yunzai && pwd
         echo "==============================================================================================="
         echo "正在安装喵喵插件"
@@ -138,15 +143,78 @@ case $choose in
         echo "TRSS-YunZai-Bot is being installed"
         echo "正在安装TRSS-YunZai-Bot"
         echo "==============================================================================================="
-        npm --registry=https://registry.npmmirror.com install pnpm -g &> /dev/null && pnpm config set registry https://registry.npmmirror.com &> /dev/null && pnpm install -P &> /dev/null && pnpm add image-size -w &> /dev/null
-        echo "TRSS-YunZai-Bot has been installed! Looking forward to your next use! by@WangShengJJ"
-        echo 'TRSS-YunZai-Bot已经安装完成! 期待您的下次使用! by@WangShengJJ'    
+        npm --registry=https://registry.npmmirror.com install pnpm -g &> /dev/null && pnpm config set registry https://registry.npmmirror.com &> /dev/null && pnpm install -P &> /dev/null && pnpm add image-size -w &> /dev/null    
         echo "==============================================================================================="
         echo "The shell will automatically start TRSS-YunZai-Bot in 5 seconds!"
         echo '脚本将于5秒后自动启动TRSS-YunZai-Bot!'
         echo "==============================================================================================="
         sleep 5s
-        node app
+        nohup node app &
+        jobs -l
+        echo "==============================================================================================="
+        echo "脚本已经将TRSS-YunZai放到后台运行"
+        echo -e "您可以使用 \e[31m ps -aux | grep -i TRSS\e[0m 命令，查看是否有后台进程名字为: \e[31mTRSS-Yun\e[0m"
+        echo "==============================================================================================="
+        echo "正在安装go-cqhttp"
+        echo "==============================================================================================="
+        #安装自动操作工具expect
+        yum install -y expect &> /dev/null
+        #判断文件是否存在
+        if [ -e ./config.yml ]; then
+            echo "==============================================================================================="
+            read -p "请输入您的QQ号(建议小号):" qq
+            echo "==============================================================================================="
+            read -p "请输入您的密码(必须输入密码):" pd
+            sed -i '/uin: /s|1233456|'$qq'|' ./config.yml
+            sed -i "s|password: ''|password: \'$pd\'|" ./config.yml
+            sed -i '/post-format: string/s|string|array|' ./config.yml
+            sed -i '/universal: ws:\/\/your_websocket_universal.server/s|ws:\/\/your_websocket_universal.server|ws:\/\/localhost:2536/go-cqhttp|' ./config.yml
+            echo "==============================================================================================="
+            echo "TRSS-YunZai-Bot has been installed! Looking forward to your next use! by@WangShengJJ"
+            echo 'TRSS-YunZai-Bot已经安装完成! 期待您的下次使用! by@WangShengJJ'
+            echo "==============================================================================================="
+            go-cqhttp
+        else
+            echo "==============================================================================================="
+            echo -e "正在下载go-cqhttp \e[31m时间较长请耐心等待\e[0m"
+            echo -e "\e[31m可能会出现下载失败的情况,如遇到请观看教程\e[0m"
+            echo -e "教程链接： \e[31m https://www.wsjj.top/archives/trss-yunzai\e[0m"
+            echo "==============================================================================================="
+            git clone https://gitee.com/Yuer-QAQ/go-cqhttp.git &> /dev/null
+            echo "当前脚本所在目录"
+            cd ./go-cqhttp && pwd
+            #判断是否下载成功
+            if [ -e go-cqhttp_1.0.1_linux_amd64.rpm ]; then
+                echo "==============================================================================================="
+                echo "正在安装go-cqhttp"
+                yum install -y go-cqhttp_1.0.1_linux_amd64.rpm &> /dev/null
+            else
+                echo "go-cqhttp下载失败,自动退出"
+                exit 1
+            fi
+#自动操作
+/usr/bin/expect << eof
+set timeout 5
+spawn go-cqhttp
+expect "您的选择是:"
+send "3\n"
+send "\n"
+expect eof
+eof
+            echo "==============================================================================================="
+            read -p "请输入您的QQ号(建议小号):" qq
+            echo "==============================================================================================="
+            read -p "请输入您的密码(必须输入密码):" pd
+            sed -i '/uin: /s|1233456|'$qq'|' ./config.yml
+            sed -i "s|password: ''|password: \'$pd\'|" ./config.yml
+            sed -i '/post-format: string/s|string|array|' ./config.yml
+            sed -i '/universal: ws:\/\/your_websocket_universal.server/s|ws:\/\/your_websocket_universal.server|ws:\/\/localhost:2536/go-cqhttp|' ./config.yml
+            echo "==============================================================================================="
+            echo "TRSS-YunZai-Bot has been installed! Looking forward to your next use! by@WangShengJJ"
+            echo 'TRSS-YunZai-Bot已经安装完成! 期待您的下次使用! by@WangShengJJ'
+            echo "==============================================================================================="
+            go-cqhttp
+        fi
         ;;
     3)
         echo "用户选择退出安装"
