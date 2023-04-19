@@ -41,7 +41,7 @@ bash ./YunZai-Bot_Shell/yunzai-bot.sh
 ```
 ### 四、报错解决
 
-如果go-cqhttp提示如下字样，请修改`Yunzai/go-cqhttp/device.json`文件
+如果go-cqhttp提示如下报错，请修改`Yunzai/go-cqhttp/device.json`文件
 
 > 把`"protocol":6,"imei"` 里面的6改成3即可
 
