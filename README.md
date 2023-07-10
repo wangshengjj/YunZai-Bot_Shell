@@ -2,7 +2,7 @@
 
 # YunZai-Bot V3 一键部署脚本
 
-## 这是一个还在测试的脚本，目前仅支持`Centos7`系统
+## 此脚本用于维护在`Centos7`上安装Yunzai-Bot
 
 - 用到的环境：
   - [Nodejs](https://nodejs.org/en)
@@ -11,8 +11,6 @@
   - [Miao-YunZai-Bot V3](https://github.com/yoimiya-kokomi/Miao-Yunzai)
   - [TRSS-YunZai-Bot](https://gitee.com/TimeRainStarSky/TRSS_Yunzai)
   - [go-cqhttp](https://github.com/Mrs4s/go-cqhttp)
-
-## 如果您懂得其他，发行版`Linux`系统的使用，可以根据您的使用习惯`修改`命令
 
 ## 使用教程：
 
